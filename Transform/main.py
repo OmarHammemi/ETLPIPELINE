@@ -2,7 +2,7 @@
 from dotenv import dotenv_values
 import boto3
 import pandas as pd
-import  psycopg2
+from datetime import datetime
 
 class Transform:
     def __init__(self):
@@ -14,38 +14,38 @@ class Transform:
                 )
         self.bucket_name = 'elt-pipeline-test'
         self.object_key = 'data.csv'
+        self.dynamodb = session.resource('dynamodb')
+        self.tableName='ELT_test'
+        self.table = self.dynamodb.Table(self.tableName)
         self.s3=session.client('s3')
         self.db_host = envVars['db_host']
         self.db_name = envVars['db_name']
         self.db_user = envVars['db_user']
-        self.db_password = envVars['db_password']
         self.db_port = envVars['db_port']
     def read_csv(self):
         # Download the object from S3 to the local file
         obj = self.s3.get_object(Bucket=self.bucket_name, Key=self.object_key)
         data = pd.read_csv(obj['Body'])
         return data
-    def transform_data(self, data):
-        conn = psycopg2.connect(
-            host=self.db_host,
-            database=self.db_name,
-            user=self.db_user,
-            password=self.db_password,
-            port=self.db_port
+    def putItemToDynamo(self,item_id, item_data):
+        table=self.dynamodb.Table('ELT_test')
+        table.put_item(
+            Item={
+                'PK': "ELT",
+                'SK': item_id,
+                **item_data 
+            }
         )
-        cursor = conn.cursor()
+        return "item ADDed to db"
+    def transform_data(self):
         data=self.read_csv()
-        for _, row in data.iterrows():
-            cursor.execute("""
-                INSERT INTO your_table_name (column1, column2, ...)
-                VALUES (%s, %s, ...);
-            """, (row['column1'], row['column2'], ...))
-
-        # Commit the transaction
-        conn.commit()
-
-        # Close the cursor and connection
-        cursor.close()
-        conn.close()
-        
-                
+        data_dict = data.to_dict('records')
+        for dt in data_dict:
+            print(dt)
+            self.putItemToDynamo(datetime.now(
+            ).strftime("%Y-%m-%d"),dt)
+            
+            
+if __name__ == "__main__":
+    transform = Transform()
+    transform.transform_data()
