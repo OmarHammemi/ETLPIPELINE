@@ -1,0 +1,4 @@
+pandas 
+pymysql
+boto3
+psycopg2
