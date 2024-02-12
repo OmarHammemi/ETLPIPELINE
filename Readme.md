@@ -59,3 +59,9 @@ Lambda Function Invocation: When the API Gateway receives an HTTP request, it in
 
 1. system demo
 ![Alt Text](architecture.png)
+
+## extra part  serverless
+
+[serverless link](https://www.serverless.com/)
+
+<h4>we can build this stack in several munite using serverless framework with automatically building aa stack that connect and manage the service and Iam Role without manually intervention with just buiding a serverless.yml and config it </h4>

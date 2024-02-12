@@ -1,0 +1,28 @@
+service: data-transformation-service
+provider:
+  name: aws
+  runtime: python3.10
+
+functions:
+  dataTransformation:
+    handler: lambda.handler
+    events:
+      - http:
+          path: read/first-chunck
+          method: get
+
+resources:
+  Resources:
+    ELTPipelineTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ELT_pipeline
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: N
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
