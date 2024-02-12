@@ -56,3 +56,6 @@ CSV File: This is the source of data, stored in the S3 bucket. The Lambda functi
 HTTP Request: Clients make HTTP GET requests to the API Gateway endpoint. This triggers the Lambda function, which retrieves data from DynamoDB and returns it as an HTTP response.<br>
 
 Lambda Function Invocation: When the API Gateway receives an HTTP request, it invokes the Lambda function associated with the requested resource. The Lambda function processes the request, interacts with DynamoDB to retrieve data, and returns the result.<br>
+
+1. system demo
+![Alt Text](architecture.png)
