@@ -12,12 +12,12 @@ pip install requirements.txt
 ```
 2. build .env.dist file
 
-aws_access_key_id = "your access key" 1. 
-aws_secret_access_key = "your secret key" 2.
-bucket_name = "your bucket name" 3.
-object_key = "s3 object key" 4.
-table_name = "your Table Name" 5.
-region = "your cloud region" 6.
+aws_access_key_id = "your access key" <br>
+aws_secret_access_key = "your secret key" <br>
+bucket_name = "your bucket name" <br>
+object_key = "s3 object key" <br>
+table_name = "your Table Name" <br>
+region = "your cloud region" <br>
 
 3. install your csv or csvs in your S3 bucket 
 
