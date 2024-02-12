@@ -1,5 +1,5 @@
 
-# ELT pipeline
+# ETL pipeline
 ## ▶️ Getting started
 
 ## part 1 Design and code a simple ETL (S3 python Dynamodb)
