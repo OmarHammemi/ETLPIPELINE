@@ -60,7 +60,7 @@ Lambda Function Invocation: When the API Gateway receives an HTTP request, it in
 1. system demo
 ![Alt Text](architecture.png)
 
-## extra part  serverless
+## Extra part  serverless framework
 
 [serverless link](https://www.serverless.com/)
 
