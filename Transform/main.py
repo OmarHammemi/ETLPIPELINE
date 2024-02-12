@@ -10,25 +10,21 @@ class Transform:
         session = boto3.Session(
                     aws_access_key_id=envVars['aws_access_key_id'],
                     aws_secret_access_key=envVars['aws_secret_access_key'] ,
-                    region_name='eu-west-1'
+                    region_name=envVars['region']
                 )
-        self.bucket_name = 'elt-pipeline-test'
-        self.object_key = 'data.csv'
+        self.bucket_name = envVars['bucket_name']
+        self.object_key = envVars['object_key']
         self.dynamodb = session.resource('dynamodb')
-        self.tableName='ELT_test'
+        self.tableName=envVars['table_name']
         self.table = self.dynamodb.Table(self.tableName)
         self.s3=session.client('s3')
-        self.db_host = envVars['db_host']
-        self.db_name = envVars['db_name']
-        self.db_user = envVars['db_user']
-        self.db_port = envVars['db_port']
     def read_csv(self):
         # Download the object from S3 to the local file
         obj = self.s3.get_object(Bucket=self.bucket_name, Key=self.object_key)
         data = pd.read_csv(obj['Body'])
         return data
     def putItemToDynamo(self,item_id, item_data):
-        table=self.dynamodb.Table('ELT_test')
+        table=self.dynamodb.Table(self.tableName)
         table.put_item(
             Item={
                 'PK': "ELT",
