@@ -14,28 +14,38 @@ def decimal_serializer(obj):
 
 def handler(event, context):
     # Check if the request is a GET method
-    if event['httpMethod'] == 'GET':
-        # Query DynamoDB for first 10 items
-        response = table.scan(Limit=10)
-        items = response['Items']
-        
-        # Convert items to JSON
-        json_items = json.dumps(items, default=decimal_serializer)
-        
-        # Return a successful response
-        return {
-            'statusCode': 200,
-            'headers': {
-                'Content-Type': 'application/json'
-            },
-            'body': json_items
-        }
-    else:
+    try:
+        if event['httpMethod'] == 'GET':
+            # Query DynamoDB for first 10 items
+            response = table.scan(Limit=10)
+            items = response['Items']
+            
+            # Convert items to JSON
+            json_items = json.dumps(items, default=decimal_serializer)
+            
+            # Return a successful response
+            return {
+                'statusCode': 200,
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'body': json_items
+            }
+        else:
+            # Return an error response
+            return {
+                'statusCode': 400,
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'body': json.dumps({'message': 'Invalid request method'})
+            }
+    except:
         # Return an error response
         return {
-            'statusCode': 400,
+            'statusCode': 500,
             'headers': {
                 'Content-Type': 'application/json'
             },
-            'body': json.dumps({'message': 'Invalid request method'})
+            'body': json.dumps({'message': 'Internal server error'})
         }
