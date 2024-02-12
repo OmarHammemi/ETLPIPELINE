@@ -27,7 +27,7 @@ class Transform:
         table=self.dynamodb.Table(self.tableName)
         table.put_item(
             Item={
-                'PK': "ELT",
+                'PK': "ETL",
                 'SK': item_id,
                 **item_data 
             }
