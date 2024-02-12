@@ -64,4 +64,6 @@ Lambda Function Invocation: When the API Gateway receives an HTTP request, it in
 
 [serverless link](https://www.serverless.com/)
 
-<h4>we can build this stack in several munite using serverless framework with automatically building aa stack that connect and manage the service and Iam Role without manually intervention with just buiding a serverless.yml and config it </h4>
+<h4>
+With the Serverless Framework, we can swiftly orchestrate this infrastructure within minutes. Leveraging the framework's capabilities, we automate the provisioning and management of the entire stack, including the seamless integration of services such as API Gateway, AWS Lambda, and DynamoDB. This process requires minimal manual intervention, as it is primarily driven by the configuration defined in the serverless.yml file. By encapsulating infrastructure as code, we ensure consistent and reproducible deployments while streamlining the development lifecycle.
+</h4>
