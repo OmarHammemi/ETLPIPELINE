@@ -23,4 +23,21 @@ region = "your cloud region" <br>
 
 <h5> data.csv </h5>
 
-4. [build your dynamodb connection and Roles](https://aws.amazon.com/dynamodb/)
+4. [build your S3 bucket and insert your data](https://aws.amazon.com/s3/)
+
+5. [build your dynamodb connection and Roles](https://aws.amazon.com/dynamodb/)
+
+6. run Tranform/main.py
+
+## part 2
+
+1. build a lambda function or run directly from Makfile
+
+2. build a dynamodb connection with the lambda function IAM Role
+
+3. connect s3 with lambda IAM Role
+
+4. Run Makefile 
+
+5. test your API
+
