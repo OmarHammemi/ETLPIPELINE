@@ -38,8 +38,9 @@ class Transform:
         data_dict = data.to_dict('records')
         for dt in data_dict:
             print(dt)
-            self.putItemToDynamo(datetime.now(
-            ).strftime("%Y-%m-%d"),dt)
+            # self.putItemToDynamo(datetime.now(
+            # ).strftime("%Y-%m-%d"),dt)
+            self.putItemToDynamo(dt['first_name'],dt)
             
             
 if __name__ == "__main__":
